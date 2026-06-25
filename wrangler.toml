@@ -1,0 +1,79 @@
+name = "news-repost-bot"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[triggers]
+crons = ["*/30 * * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "news-repost-bot"
+database_id = "REPLACE_ME"
+
+[[kv_namespaces]]
+binding = "STATE"
+id = "REPLACE_ME"
+
+# Optional R2 bucket for staging images before upload. Uncomment + create the
+# bucket (`wrangler r2 bucket create repost-staging`) if you want to use it.
+# [[r2_buckets]]
+# binding = "IMAGES"
+# bucket_name = "repost-staging"
+
+[vars]
+CONFIG_JSON = """
+{
+  "dry_run": false,
+  "sources": [
+    {
+      "type": "reddit",
+      "name": "pics",
+      "sort": "top",
+      "time_filter": "day",
+      "limit": 25,
+      "poll_interval_min": 60,
+      "targets": ["MySubOne"]
+    },
+    {
+      "type": "twitter",
+      "mode": "account",
+      "accounts": ["Reuters", "AP", "BBCWorld", "espn"],
+      "sort": "recent",
+      "require_verified": true,
+      "limit": 15,
+      "poll_interval_min": 60,
+      "targets": ["MyNewsSubOne"]
+    },
+    {
+      "type": "instagram",
+      "mode": "account",
+      "query": "natgeo",
+      "limit": 10,
+      "poll_interval_min": 180,
+      "targets": ["MySubThree"]
+    }
+  ],
+  "posting": {
+    "routing_mode": "mapping",
+    "min_image_width": 600,
+    "min_image_height": 600,
+    "max_filesize_mb": 18,
+    "allowed_formats": ["jpg", "jpeg", "png", "gif"],
+    "caption_template": "{caption}\\n\\nvia {author}",
+    "dedup_hamming_threshold": 5,
+    "bot_disclosure": {
+      "enabled": true,
+      "mode": "comment",
+      "text": "🤖 This was posted automatically by a bot. Source credited above."
+    },
+    "respect_subreddit_bot_rules": true,
+    "moderated_subs_allowlist": ["MySubOne", "MyNewsSubOne", "MySubThree"],
+    "rate_limit": {
+      "min_seconds_between_posts": 90,
+      "max_posts_per_target_per_hour": 6,
+      "max_posts_per_run": 20
+    }
+  }
+}
+"""

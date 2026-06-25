@@ -1,0 +1,14 @@
+# Copy to `.dev.vars` (gitignored) for local development with `wrangler dev`.
+# In production set these with `wrangler secret put <NAME>` instead.
+
+REDDIT_CLIENT_ID=
+REDDIT_CLIENT_SECRET=
+REDDIT_USER=
+REDDIT_PASS=
+REDDIT_USER_AGENT=news-repost-bot/1.0 by u/yourname
+
+TWITTER_BEARER_TOKEN=
+
+# Optional — Instagram external scraper API (leave blank to skip IG entirely).
+IG_API_BASE_URL=
+EXTERNAL_IG_API_KEY=
