@@ -1,0 +1,19 @@
+{
+  "name": "news-repost-bot-devvit",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "login": "devvit login",
+    "dev": "devvit playtest",
+    "upload": "devvit upload",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@devvit/public-api": "^0.13.6"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,3 @@
+# Devvit app manifest. The name must be globally unique and lowercase-hyphen,
+# 4+ chars — change it to something of your own before `devvit upload`.
+name: news-repost-bot

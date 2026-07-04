@@ -16,6 +16,14 @@ config-driven, and every source is isolated so one failure can't sink the run.
 > defaults (disclosure on, allowlist on, conservative rate caps) are there for a
 > reason — keep them on until you've vetted a target.
 
+> **Two versions in this repo.** This root project is the **Cloudflare Worker**
+> (multi-source: Reddit + Twitter/X + Instagram). There is also a **Devvit
+> (Reddit-native) version** in [`devvit-bot/`](./devvit-bot/) that does
+> **Reddit → Reddit** reposting only, runs on Reddit's own servers with zero
+> infrastructure, and installs per-subreddit. Use the Worker when you need
+> Twitter/IG sources; use the Devvit app when you only need subreddit → subreddit
+> and want no setup. They can run side by side into the same subs.
+
 ---
 
 ## How it works
